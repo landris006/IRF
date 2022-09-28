@@ -79,7 +79,7 @@ namespace _3_UserMaintenance_PDIW2H {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to valami.
+        ///   Looks up a localized string similar to valami2.
         /// </summary>
         internal static string valami {
             get {
