@@ -79,15 +79,6 @@ namespace _3_UserMaintenance_PDIW2H {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to valami.
-        /// </summary>
-        internal static string valami {
-            get {
-                return ResourceManager.GetString("valami", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fájlba írás.
         /// </summary>
         internal static string WriteToFile {

@@ -123,9 +123,6 @@
   <data name="FullName" xml:space="preserve">
     <value>Teljes név</value>
   </data>
-  <data name="valami" xml:space="preserve">
-    <value>valami</value>
-  </data>
   <data name="WriteToFile" xml:space="preserve">
     <value>Fájlba írás</value>
   </data>
