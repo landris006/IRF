@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace _3_UserMaintenance_PDIW2H
 {
@@ -20,6 +22,7 @@ namespace _3_UserMaintenance_PDIW2H
             InitializeComponent();
             label1.Text = Resource.FullName;
             button1.Text = Resource.Add;
+            button2.Text = Resource.WriteToFile;
 
             listBox1.DataSource = users;
             listBox1.ValueMember = "ID";
@@ -39,6 +42,30 @@ namespace _3_UserMaintenance_PDIW2H
             };
 
             users.Add(newUser);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                DefaultExt = "csv",
+                Filter = "Comma separated values (*.csv) | *.csv",
+            };
+
+            if (sfd.ShowDialog() == DialogResult.Cancel || sfd.FileName == "")
+            {
+                return;
+            }
+
+            StreamWriter sw = new StreamWriter(sfd.FileName);
+
+            foreach (User user in users)
+            {
+                sw.WriteLine($"{user.ID};{user.FullName}");
+                sw.WriteLine();
+            }
+
+            sw.Close();
         }
     }
 }
