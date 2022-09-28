@@ -18,8 +18,7 @@ namespace _3_UserMaintenance_PDIW2H
         public Form1()
         {
             InitializeComponent();
-            label1.Text = Resource.LastName;
-            label2.Text = Resource.FirstName;
+            label1.Text = Resource.FullName;
             button1.Text = Resource.Add;
 
             listBox1.DataSource = users;
@@ -29,15 +28,14 @@ namespace _3_UserMaintenance_PDIW2H
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox2.Text == "" || textBox3.Text == "")
+            if (textBox2.Text == "")
             {
                 return;
             }
 
             var newUser = new User
             {
-                FirstName = textBox2.Text,
-                LastName = textBox3.Text,
+                FullName = textBox2.Text,
             };
 
             users.Add(newUser);
