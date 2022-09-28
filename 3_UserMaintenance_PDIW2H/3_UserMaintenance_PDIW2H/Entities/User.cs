@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _3_UserMaintenance_PDIW2H.Entities
 {
-    internal class User
+    public class User
     {
         public Guid ID { get; set; } = new Guid();
         public string FirstName { get; set; }
