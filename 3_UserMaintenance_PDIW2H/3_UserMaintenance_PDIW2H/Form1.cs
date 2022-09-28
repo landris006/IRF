@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _3_UserMaintenance_PDIW2H.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,9 @@ namespace _3_UserMaintenance_PDIW2H
         public Form1()
         {
             InitializeComponent();
+            label1.Text = Resource.LastName;
+            label2.Text = Resource.FirstName;
+            button1.Text = Resource.Add;
         }
     }
 }
