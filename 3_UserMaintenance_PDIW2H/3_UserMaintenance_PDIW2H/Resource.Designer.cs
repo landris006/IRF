@@ -70,6 +70,15 @@ namespace _3_UserMaintenance_PDIW2H {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kiválasztott törlése.
+        /// </summary>
+        internal static string DeleteSelected {
+            get {
+                return ResourceManager.GetString("DeleteSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Teljes név.
         /// </summary>
         internal static string FullName {

@@ -23,6 +23,7 @@ namespace _3_UserMaintenance_PDIW2H
             label1.Text = Resource.FullName;
             button1.Text = Resource.Add;
             button2.Text = Resource.WriteToFile;
+            button3.Text = Resource.DeleteSelected;
 
             listBox1.DataSource = users;
             listBox1.ValueMember = "ID";
@@ -66,6 +67,22 @@ namespace _3_UserMaintenance_PDIW2H
             }
 
             sw.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedValue == null)
+            {
+                return;
+            }
+
+            Guid selectedUserId = ((User)listBox1.SelectedItem).ID;
+            Console.WriteLine(listBox1.SelectedValue);
+            Console.WriteLine(((User)listBox1.SelectedItem).ID);
+
+            users = new BindingList<User>((from user in users
+                                           where !user.ID.Equals(selectedUserId)
+                                           select user).ToList());
         }
     }
 }
