@@ -23,9 +23,11 @@ namespace excel_export_pdiw2h
         public Form1()
         {
             InitializeComponent();
-            loadData();
 
+            loadData();
             createExcel();
+
+            this.Visible = false;
         }
 
         private void loadData()
@@ -41,7 +43,7 @@ namespace excel_export_pdiw2h
                 xlWorkBook = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWorkBook.ActiveSheet;
 
-                // createTable();
+                createTable();
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -55,6 +57,27 @@ namespace excel_export_pdiw2h
                 xlApp.Quit();
                 xlWorkBook = null;
                 xlApp = null;
+            }
+        }
+
+        private void createTable()
+        {
+            string[] headers = new string[]
+            {
+                    "Kód",
+                    "Eladó",
+                    "Oldal",
+                    "Kerület",
+                    "Lift",
+                    "Szobák száma",
+                    "Alapterület (m2)",
+                    "Ár (mFt)",
+                    "Négyzetméter ár (Ft/m2)"
+            };
+
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i + 1] = headers[i];
             }
         }
     }
