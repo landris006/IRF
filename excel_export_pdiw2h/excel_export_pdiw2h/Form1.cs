@@ -25,7 +25,7 @@ namespace excel_export_pdiw2h
             InitializeComponent();
 
             loadData();
-            createExcel();
+            CreateExcel();
 
             this.Visible = false;
         }
@@ -35,7 +35,7 @@ namespace excel_export_pdiw2h
             flats = realEstateEntities.Flat.ToList();
         }
 
-        private void createExcel()
+        private void CreateExcel()
         {
             try
             {
@@ -43,7 +43,7 @@ namespace excel_export_pdiw2h
                 xlWorkBook = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWorkBook.ActiveSheet;
 
-                createTable();
+                CreateTable();
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -53,14 +53,14 @@ namespace excel_export_pdiw2h
                 string errorMessage = string.Format($"Error: {ex.Message}, /nLine: {ex.Source}");
                 MessageBox.Show(errorMessage, "Error");
 
-                xlWorkBook.Close();
+                xlWorkBook.Close(false, Type.Missing, Type.Missing);
                 xlApp.Quit();
                 xlWorkBook = null;
                 xlApp = null;
             }
         }
 
-        private void createTable()
+        private void CreateTable()
         {
             string[] headers = new string[]
             {
@@ -79,6 +79,49 @@ namespace excel_export_pdiw2h
             {
                 xlSheet.Cells[1, i + 1] = headers[i];
             }
+
+            object[,] values = new object[flats.Count, headers.Length];
+
+
+            for (int i = 0; i < flats.Count; i++)
+            {
+                Flat flat = flats[i];
+
+                
+
+                Console.WriteLine(flat.GetType().Attributes);
+
+                values[i, 0] = flat.Code;
+                values[i, 1] = flat.Vendor;
+                values[i, 2] = flat.Side;
+                values[i, 3] = flat.District;
+                values[i, 4] = flat.Elevator;
+                values[i, 5] = flat.NumberOfRooms;
+                values[i, 6] = flat.FloorArea;
+                values[i, 7] = flat.Price;
+                values[i, 8] = "";
+
+                xlSheet.get_Range(
+                                GetCell(2, 1),
+                                GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+            }
+        }
+
+        private string GetCell(int x, int y)
+        {
+            string ExcelCoordinate = "";
+            int dividend = y;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+            ExcelCoordinate += x.ToString();
+
+            return ExcelCoordinate;
         }
     }
 }
