@@ -87,19 +87,17 @@ namespace excel_export_pdiw2h
             {
                 Flat flat = flats[i];
 
-                
-
-                Console.WriteLine(flat.GetType().Attributes);
+                const int MFT_TO_FT = 1000000;
 
                 values[i, 0] = flat.Code;
                 values[i, 1] = flat.Vendor;
                 values[i, 2] = flat.Side;
                 values[i, 3] = flat.District;
-                values[i, 4] = flat.Elevator;
+                values[i, 4] = flat.Elevator ? "Van" : "Nincs";
                 values[i, 5] = flat.NumberOfRooms;
                 values[i, 6] = flat.FloorArea;
                 values[i, 7] = flat.Price;
-                values[i, 8] = "";
+                values[i, 8] = $"={GetCell(i + 2, 8)} / {GetCell(i + 2, 7)} * {MFT_TO_FT}";
 
                 xlSheet.get_Range(
                                 GetCell(2, 1),
