@@ -17,10 +17,12 @@ namespace webszolgaltatas_pdiw2h
     public partial class Form1 : Form
     {
         BindingList<RateData> rates = new BindingList<RateData>();
+        BindingList<string> currencies = new BindingList<string>();
 
         public Form1()
         {
             InitializeComponent();
+            GetCurrencies();
             RefreshData();
         }
 
@@ -29,6 +31,23 @@ namespace webszolgaltatas_pdiw2h
             rates.Clear();
             ProcessXML(Request());
             Visualize();
+        }
+
+        private void GetCurrencies()
+        {
+            MNBArfolyamServiceSoapClient client = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody requestBody = new GetCurrenciesRequestBody();
+
+            GetCurrenciesResponseBody response = client.GetCurrencies(requestBody);
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(response.GetCurrenciesResult);
+            Console.WriteLine(response.GetCurrenciesResult);
+            foreach (XmlElement element in xml.DocumentElement.ChildNodes[0])
+            {
+                currencies.Add(element.InnerText);
+            }
+            comboBox1.DataSource = currencies;
         }
 
         private GetExchangeRatesResponseBody Request()
@@ -53,6 +72,12 @@ namespace webszolgaltatas_pdiw2h
             foreach (XmlElement element in xml.DocumentElement)
             {
                 XmlElement childElement = ((XmlElement)element.ChildNodes[0]);
+
+                if (childElement == null)
+                {
+                    continue;
+                }
+
                 decimal unit = Convert.ToDecimal(childElement.GetAttribute("unit"));
                 decimal value = Convert.ToDecimal(childElement.InnerText);
 
@@ -62,9 +87,9 @@ namespace webszolgaltatas_pdiw2h
                     Value = unit != 0 ? value / unit : value,
                 };
 
-                dataGridView1.DataSource = rates;
                 rates.Add(newRateData);
             }
+            dataGridView1.DataSource = rates;
         }
 
         private void Visualize()
