@@ -21,6 +21,12 @@ namespace webszolgaltatas_pdiw2h
         public Form1()
         {
             InitializeComponent();
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            rates.Clear();
             ProcessXML(Request());
             Visualize();
         }
@@ -30,9 +36,9 @@ namespace webszolgaltatas_pdiw2h
             MNBArfolyamServiceSoapClient client = new MNBArfolyamServiceSoapClient();
             GetExchangeRatesRequestBody requestBody = new GetExchangeRatesRequestBody
             {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30",
+                currencyNames = comboBox1?.SelectedItem?.ToString() ?? "EUR",
+                startDate = dateTimePicker1.Value.ToString(),
+                endDate = dateTimePicker2.Value.ToString(),
             };
 
             return client.GetExchangeRates(requestBody);
@@ -77,6 +83,21 @@ namespace webszolgaltatas_pdiw2h
             chartArea.AxisY.IsStartedFromZero = false;
 
             chartRateData.DataSource = rates;
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
