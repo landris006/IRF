@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using webszolgaltatas_pdiw2h.Entities;
 using webszolgaltatas_pdiw2h.MnbServiceReference;
@@ -21,6 +22,7 @@ namespace webszolgaltatas_pdiw2h
         {
             InitializeComponent();
             ProcessXML(Request());
+            Visualize();
         }
 
         private GetExchangeRatesResponseBody Request()
@@ -46,7 +48,7 @@ namespace webszolgaltatas_pdiw2h
             {
                 XmlElement childElement = ((XmlElement)element.ChildNodes[0]);
                 decimal unit = Convert.ToDecimal(childElement.GetAttribute("unit"));
-                decimal value = Convert.ToDecimal(childElement.GetAttribute("InnerText"));
+                decimal value = Convert.ToDecimal(childElement.InnerText);
 
                 RateData newRateData = new RateData {
                     Date = Convert.ToDateTime(element.GetAttribute("date")),
@@ -54,8 +56,27 @@ namespace webszolgaltatas_pdiw2h
                     Value = unit != 0 ? value / unit : value,
                 };
 
+                dataGridView1.DataSource = rates;
                 rates.Add(newRateData);
             }
+        }
+
+        private void Visualize()
+        {
+            Series series = chartRateData.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+
+            chartRateData.Legends[0].Enabled = false;
+
+            ChartArea chartArea = chartRateData.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisY.IsStartedFromZero = false;
+
+            chartRateData.DataSource = rates;
         }
     }
 }
