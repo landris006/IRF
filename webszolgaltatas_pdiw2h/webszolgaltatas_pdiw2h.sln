@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webszolgaltatas_pdiw2h", "webszolgaltatas_pdiw2h\webszolgaltatas_pdiw2h.csproj", "{C8B75A38-8000-4626-BABC-3CE0E55CFA62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8B75A38-8000-4626-BABC-3CE0E55CFA62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B75A38-8000-4626-BABC-3CE0E55CFA62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B75A38-8000-4626-BABC-3CE0E55CFA62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B75A38-8000-4626-BABC-3CE0E55CFA62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2EA26B55-F94C-41C9-A0A1-ECFA8F01460C}
+	EndGlobalSection
+EndGlobal
