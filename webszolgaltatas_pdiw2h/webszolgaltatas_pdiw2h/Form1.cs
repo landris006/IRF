@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using webszolgaltatas_pdiw2h.Entities;
 using webszolgaltatas_pdiw2h.MnbServiceReference;
 
 namespace webszolgaltatas_pdiw2h
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> rates = new BindingList<RateData>();
+
         public Form1()
         {
             InitializeComponent();
