@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace patterns_PDIW2H.Entities
 {
-    class Ball : Label
+    public class Ball : Label
     {
         public Ball()
         {

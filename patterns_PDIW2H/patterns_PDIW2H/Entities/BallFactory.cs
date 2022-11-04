@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace patterns_PDIW2H.Entities
 {
-    class BallFactory
+    public class BallFactory
     {
         public Ball CreateNew()
         {
