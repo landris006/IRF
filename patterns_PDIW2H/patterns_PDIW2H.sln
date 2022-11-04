@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patterns_PDIW2H", "patterns_PDIW2H\patterns_PDIW2H.csproj", "{19D314D1-CA25-4122-8C29-7F860E980779}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19D314D1-CA25-4122-8C29-7F860E980779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D314D1-CA25-4122-8C29-7F860E980779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D314D1-CA25-4122-8C29-7F860E980779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D314D1-CA25-4122-8C29-7F860E980779}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B400412-C202-48ED-B42D-E5C8680F14BE}
+	EndGlobalSection
+EndGlobal
