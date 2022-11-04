@@ -44,7 +44,7 @@ namespace patterns_PDIW2H
 
             foreach (Ball ball in _balls)
             {
-                ball.MoveBall();
+                ball.MoveToy();
 
                 if (ball.Left > maxPosition)
                 {
