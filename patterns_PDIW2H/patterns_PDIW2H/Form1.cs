@@ -1,4 +1,5 @@
-﻿using patterns_PDIW2H.Entities;
+﻿using patterns_PDIW2H.Abstractions;
+using patterns_PDIW2H.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,10 @@ namespace patterns_PDIW2H
 {
     public partial class Form1 : Form
     {
-        private List<Ball> _balls = new List<Ball>();
-        private BallFactory _factory;
+        private List<Toy> _toys = new List<Toy>();
+        private IToyFactory _factory;
 
-        public BallFactory Factory
+        public IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
@@ -26,43 +27,43 @@ namespace patterns_PDIW2H
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            Factory = new CarFactory();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Ball newBall = Factory.CreateNew();
+            Toy newBall = Factory.CreateNew();
             newBall.Left = -newBall.Width;
 
             mainPanel.Controls.Add(newBall);
-            _balls.Add(newBall);
+            _toys.Add(newBall);
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
         int maxPosition = 0;
 
-            foreach (Ball ball in _balls)
+            foreach (Toy toy in _toys)
             {
-                ball.MoveToy();
+                toy.MoveToy();
 
-                if (ball.Left > maxPosition)
+                if (toy.Left > maxPosition)
                 {
-                    maxPosition = ball.Left;
+                    maxPosition = toy.Left;
                 }
             }
 
             if (maxPosition > 1000)
             {
-                Ball ballToDelete = _balls.FirstOrDefault();
+                Toy toyToDelete = _toys.FirstOrDefault();
 
-                if (ballToDelete == null)
+                if (toyToDelete == null)
                 {
                     return;
                 }
 
-                _balls.Remove(ballToDelete);
-                mainPanel.Controls.Remove(ballToDelete);
+                _toys.Remove(toyToDelete);
+                mainPanel.Controls.Remove(toyToDelete);
             }
         }
     }
