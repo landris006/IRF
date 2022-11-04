@@ -66,5 +66,15 @@ namespace patterns_PDIW2H
                 mainPanel.Controls.Remove(toyToDelete);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
     }
 }
