@@ -28,12 +28,13 @@ namespace szimulacio_pdiw2h
             LoadBirthBrobabilities("../../../../data/szimulacio/születés.csv");
             LoadDeathProbabilites("../../../../data/szimulacio/halál.csv");
 
-            for (int year = 2005; year <= 2024; year++)
+            for (uint year = 2005; year <= 2024; year++)
             {
                 // Végigmegyünk az összes személyen
                 for (int i = 0; i < population.Count; i++)
                 {
                     // Ide jön a szimulációs lépés
+                    SimStep(year, population[i]);
                 }
 
                 int nbrOfMales = (from x in population
@@ -106,6 +107,39 @@ namespace szimulacio_pdiw2h
             sr.Close();
 
             return deathProbabilities;
+        }
+
+        void SimStep(uint year, Person person)
+        {
+            if (!person.IsAlive)
+            {
+                return;
+            }
+
+            uint age = year - person.BirthYear;
+            double pDeath = (from x in deathProbabilities
+                             where x.Gender == person.Gender && x.Age == age
+                             select x.Propbability).FirstOrDefault();
+
+            if (rng.NextDouble() <= pDeath)
+                person.IsAlive = false;
+
+            if (person.Gender ==  Gender.Female)
+            {
+                double pBirth = (from x in birthProbabilities
+                                 where x.Age == age
+                                 select x.Propbability).FirstOrDefault();
+
+                if (rng.NextDouble() <= pBirth)
+                {
+                    population.Add(new Person
+                    {
+                        BirthYear = year,
+                        NumberOfChildren = 0,
+                        Gender = (Gender)(rng.Next(1, 3))
+                    });
+                }
+            }
         }
     }
 }
